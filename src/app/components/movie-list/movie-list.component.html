@@ -1,0 +1,28 @@
+@if (isLoading()) {
+    <mat-spinner></mat-spinner>
+} @else {
+    <mat-form-field class="search-input">
+        <mat-label>Find movies</mat-label>
+
+        <input type="text" matInput [formControl]="filter" placeholder="Find movies" autocomplete="none">
+    </mat-form-field>
+
+    <div class="movies-list">
+      @if (filter.value) {
+        <div class="search"><h6>Find by:</h6> {{filter.value}}</div>
+      }
+        @for (movie of movies()?.results; track $index) {
+
+            <app-movie [movie]="movie" (click)="movieDetail(movie.id)" />
+
+        }@empty {
+            No Movies
+        }
+    </div>
+}
+    <mat-paginator
+        (page)="paginatorHandle($event)"
+        [length]="movies()?.total_results"
+        [pageSize]="20"
+        aria-label="Select page">
+    </mat-paginator>

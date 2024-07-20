@@ -1,0 +1,15 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{movie?.title}}</mat-card-title>
+      </mat-card-title-group>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="movie-image">
+          <img [ngSrc]="movie?.poster_path | imgUrl" width="150" height="200" priority>
+        </div>
+
+        <span>{{movie?.overview}}</span>
+    </mat-card-content>
+</mat-card>

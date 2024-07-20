@@ -1,0 +1,12 @@
+:host{
+  cursor: pointer;
+}
+mat-card-content{
+  display: flex;
+  gap: 1.75rem;
+  padding-top: 1.75rem;
+}
+.movie-image{
+  position: relative;
+  height: 100%;
+}

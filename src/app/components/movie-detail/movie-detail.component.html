@@ -1,0 +1,50 @@
+@if (isLoading()) {
+  <mat-spinner diameter="200"></mat-spinner>
+} @else {
+  <div class="wrapper">
+    <div class="back-button" (click)="home()" ><mat-icon aria-hidden="false" fontIcon="arrow_back"></mat-icon> Back</div>
+
+    <mat-card appearance="outlined">
+    <mat-card-content>
+      <div class="movie">
+        <div class="movie-title">
+            <h2>{{details()?.title}}</h2>
+        </div>
+
+        <div class="movie-tags">
+          <div class="movie-image">
+              <img [ngSrc]="details()?.poster_path | imgUrl" width="500" height="750" priority>
+          </div>
+
+          <div class="details">
+              <div>
+                <h5>Release:</h5> {{details()?.release_date | date}}
+              </div>
+
+              <div>
+                <h5>Genres:</h5>
+                @for (genre of details()?.genres; track $index) { {{genre.name}} }
+              </div>
+
+              <div>
+                <h5>Budget: </h5> {{details()?.budget | currency: 'USD'}}
+              </div>
+
+              <div>
+                <h5>Revenue:</h5> {{details()?.revenue | currency: 'USD'}}$
+              </div>
+
+              <div>
+                <a [href]="details()?.homepage">Homepage</a>
+              </div>
+          </div>
+        </div>
+
+        <div class="movie-description">
+          {{details()?.overview}}
+        </div>
+      </div>
+    </mat-card-content>
+    </mat-card>
+  </div>
+}

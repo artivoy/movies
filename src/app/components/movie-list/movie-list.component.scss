@@ -1,0 +1,24 @@
+:host{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+:host:has(mat-spinner){
+    height: 100%;
+    justify-content: center;
+}
+.movies-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 60vw;
+    .search{
+      display: flex;
+      align-items: baseline;
+      gap: 1.15rem;
+    }
+}
+.search-input{
+    width: 60vw;
+    margin: 1rem 0;
+}
