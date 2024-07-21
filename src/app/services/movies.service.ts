@@ -1,5 +1,5 @@
 import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { setLoading } from '../interceptors/loading.interceptor';
 import { environment } from '../../environments/environment';
 import { catchError, Observable, of } from 'rxjs';
@@ -10,43 +10,15 @@ import { MovieDetails } from '../model/movie-details.model';
   providedIn: 'root'
 })
 export class MoviesService {
-  public sizes = {
-    "backdrop_sizes": [
-      "w300",
-      "w780",
-      "w1280",
-      "original"
-    ],
-    "logo_sizes": [
-      "w45",
-      "w92",
-      "w154",
-      "w185",
-      "w300",
-      "w500",
-      "original"
-    ],
-    "poster_sizes": [
-      "w92",
-      "w154",
-      "w185",
-      "w342",
-      "w500",
-      "w780",
-      "original"
-    ],
-  }
+
+  private httpClient = inject(HttpClient);
   private headers = new HttpHeaders({
     Accept: 'application/json',
     Authorization: `Bearer ${environment.apikey}`
   });
 
-  constructor(private httpClient: HttpClient)
-
-  {}
-
   public getMovies(page: number, language = 'en-US'): Observable<MoviesResult | undefined>{
-    let params = new HttpParams()
+    const params = new HttpParams()
     .set('language', language)
     .set('page', page);
 
@@ -55,13 +27,17 @@ export class MoviesService {
       headers: this.headers,
       params,
     }).pipe(
-      catchError(err => of())
+      catchError(err => {
+          console.error('Something went wrong whilegetting movies', err)
+          return of()
+        }
+      )
     )
   }
 
   public getMovieDetails(id: number, language = 'en-US'): Observable<MovieDetails | never>{
 
-    let params = new HttpParams()
+    const params = new HttpParams()
     .set('language', language);
 
     params.append('language', language);
@@ -71,13 +47,16 @@ export class MoviesService {
       headers: this.headers,
       params
     }).pipe(
-      catchError(err => of())
+      catchError(err => {
+        console.error('Something went wrong while getting movie details', err)
+        return of()
+      })
     )
   }
 
   public search(query: string, page: number, language = 'en-US'): Observable<MoviesResult  | undefined>{
 
-    let params = new HttpParams()
+    const params = new HttpParams()
     .set('query', query)
     .set('language', language)
     .set('page', page);
@@ -87,7 +66,10 @@ export class MoviesService {
       headers: this.headers,
       params
     }).pipe(
-      catchError(err => of())
+      catchError(err => {
+        console.error('Something went wrong while search', err)
+        return of()
+      })
     )
   }
 }

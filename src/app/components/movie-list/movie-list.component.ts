@@ -43,8 +43,6 @@ export class MovieListComponent implements OnInit {
   private destroyRef: DestroyRef = inject(DestroyRef);
   private readonly moviesService = inject(MoviesService);
   private readonly router = inject(Router);
-  constructor(){
-  }
 
   ngOnInit(): void {
       this.gettingMoviesList();
@@ -66,6 +64,7 @@ export class MovieListComponent implements OnInit {
           return;
         }
         this.gettingMoviesList();
+        this.paginator()?.firstPage();
       })
   }
 

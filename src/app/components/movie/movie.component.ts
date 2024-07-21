@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { Movie } from '../../model/movies.model';
-import { environment } from '../../../environments/environment';
 import { MatCardModule } from '@angular/material/card';
 import { ImgUrlPipe } from '../../pipes/img-url.pipe';
 import { NgOptimizedImage } from '@angular/common';
@@ -13,11 +12,9 @@ import { NgOptimizedImage } from '@angular/common';
     ImgUrlPipe,
     NgOptimizedImage],
   templateUrl: './movie.component.html',
-  styleUrl: './movie.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './movie.component.scss'
 })
 
 export class MovieComponent {
-@Input() movie: Movie | undefined;
-imgPath = environment.imgUrl;
+    @Input() movie: Movie | undefined;
 }

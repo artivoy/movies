@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoadingService {
 
-
   public loading = signal(false);
 
   loadingOn() {

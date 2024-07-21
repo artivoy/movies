@@ -6,7 +6,6 @@ export const routes: Routes = [
 
            {   path: '',
                 title: 'Movies List',
-
                 loadComponent: () =>
                     import('./components/movie-list/movie-list.component').then((c)=> c.MovieListComponent)
             },
